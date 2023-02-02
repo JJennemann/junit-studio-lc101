@@ -8,65 +8,132 @@ import static org.junit.Assert.*;
 public class BalancedBracketsTest {
 
     //TODO: add tests here
+
     @Test
-    public void emptyTest() {
-        assertEquals(true, true);
+    public void oneOpeningThenOneClosingBrackets(){
+        String spec = "a single set of balanced brackets returns true";
+        String testData = "[]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(spec, result);
     }
     @Test
-    public void noBracketsReturnsFalse(){
-        assertFalse(BalancedBrackets.hasBalancedBrackets("launchcode"));
+    public void noBracketsReturnsTrue(){
+        String spec = "no brackets returns true";
+        String testData = "launchcode";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(spec, result);
+    }
+    @Test
+    public void emptyStringReturnsTrue(){
+        String spec = "empty string returns true";
+        String testData = "";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(spec, result);
     }
     @Test
     public void oneOpeningBracket(){
-        assertFalse(BalancedBrackets.hasBalancedBrackets("["));
+        String spec = "only one opening bracket returns false";
+        String testData = "[";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(spec, result);
     }
     @Test
     public void twoOpeningBrackets(){
-        assertFalse(BalancedBrackets.hasBalancedBrackets("[["));
+        String spec = "two opening brackets and no closing bracket returns false";
+        String testData = "[[";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(spec, result);
     }
     @Test
-    public void oneOpeningThenOneClosingBrackets(){
-        assertTrue(BalancedBrackets.hasBalancedBrackets("[]"));
+    public void balancedBracketThenOneOpeningBrackets(){
+        String spec = "a balanced bracket followed by one opening bracket returns false";
+        String testData = "[][";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(spec, result);
     }
     @Test
-    public void oneOpeningThenOneClosingThenOneOpeningBrackets(){
-        assertFalse(BalancedBrackets.hasBalancedBrackets("[]["));
-    }
-    @Test
-    public void oneOpeningThenOneClosingThenOneOpeningThenOneClosingBrackets(){
-        assertTrue(BalancedBrackets.hasBalancedBrackets("[][]"));
+    public void oneOpeningOneClosingOneOpeningOneClosingBrackets(){
+        String spec = "three consecutive sets of balanced brackets returns true";
+        String testData = "[][][]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(spec, result);
     }
     @Test
     public void twoOpeningOneClosingBrackets(){
-        assertFalse(BalancedBrackets.hasBalancedBrackets("[[]"));
+        String spec = "an opening bracket followed by a set of balanced brackets returns false";
+        String testData = "[[]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(spec, result);
     }
     @Test
-    public void twoOpeningTwoClosingBrackets(){
-        assertTrue(BalancedBrackets.hasBalancedBrackets("[[]]"));
+    public void threeOpeningThreeClosingBrackets(){
+        String spec = "three sets of nested brackets returns true";
+        String testData = "[[[]]]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(spec, result);
     }
     @Test
     public void oneClosingBracket (){
-        assertFalse(BalancedBrackets.hasBalancedBrackets("]"));
+        String spec = "a single closing bracket returns false";
+        String testData = "]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(spec, result);
     }
     @Test
     public void oneClosingOneOpeningBrackets(){
-        assertFalse(BalancedBrackets.hasBalancedBrackets("]["));
+        String spec = "one closing bracket followed by an opening bracket return false";
+        String testData = "][";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(spec, result);
     }
     @Test
     public void twoClosingBrackets(){
-        assertFalse(BalancedBrackets.hasBalancedBrackets("]]"));
+        String spec = "two closing brackets returns false";
+        String testData = "]]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(spec, result);
     }
     @Test
     public void twoClosingOneOpeningBrackets(){
-        assertFalse(BalancedBrackets.hasBalancedBrackets("]]["));
+        String spec = "two closing brackets followed by an opening bracket returns false";
+        String testData = "]][";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(spec, result);
     }
     @Test
     public void oneClosingOneOpeningOneClosingBrackets(){
-        assertFalse(BalancedBrackets.hasBalancedBrackets("][]"));
+        String spec = "one closing bracket followed by a set of balanced brackets returns false";
+        String testData = "[[]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(spec, result);
     }
     @Test
     public void oneClosingTwoOpeningBrackets(){
-        assertFalse(BalancedBrackets.hasBalancedBrackets("][["));
+        String spec = "one closing bracket followed by two opening brackets returns false";
+        String testData = "][[";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(spec, result);
+    }
+    @Test
+    public void setOfBalancedBracketsBeforeOtherCharacters(){
+        String spec = "single set of balanced brackets before other characters returns true";
+        String testData = "[]launchcode";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(spec, result);
+    }
+    @Test
+    public void setOfBalancedBracketsAroundOtherCharacters(){
+        String spec = "single set of balanced brackets around other characters returns true";
+        String testData = "[launchcode]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(spec, result);
+    }
+    @Test
+    public void setOfBalancedBracketsAmongOtherCharacters(){
+        String spec = "single set of balanced brackets before other characters returns true";
+        String testData = "launch[code]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(spec, result);
     }
 
     //First tests before redoing without text
